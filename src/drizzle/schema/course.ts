@@ -1,8 +1,22 @@
-import { pgTable, serial, timestamp, text } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, pgEnum, index } from 'drizzle-orm/pg-core';
+import { timestamps } from '../column.helpers';
 
-export const course = pgTable('course', {
-  id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at').notNull().defaultNow(),
-});
+export const descriptionTypesEnum = pgEnum('descriptionType', [
+  'para',
+  'video',
+]);
+export const course = pgTable(
+  'course',
+  {
+    id: serial().primaryKey(),
+    title: text().notNull(),
+    description: text().notNull(),
+    descriptionType: descriptionTypesEnum().default('para'),
+    ...timestamps,
+  },
+  (table) => {
+    return {
+      titleIdx: index('title_idx').on(table.title),
+    };
+  },
+);
