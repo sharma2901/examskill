@@ -14,9 +14,10 @@ export const DRIZZLE = Symbol('drizzle-connection');
         const database_url = configService.get<string>('DATABASE_URL');
         const pool = new Pool({ connectionString: database_url, ssl: true });
         // noinspection BadExpressionStatementJS
-        drizzle(pool, { schema, casing: 'snake_case' }) as NodePgDatabase<
-          typeof schema
-        >;
+        return drizzle(pool, {
+          schema,
+          casing: 'snake_case',
+        }) as NodePgDatabase<typeof schema>;
       },
     },
   ],

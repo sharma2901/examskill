@@ -1,14 +1,14 @@
-import { pgTable, serial, text, pgEnum, index } from 'drizzle-orm/pg-core';
+import { pgTable, text, pgEnum, index, uuid } from 'drizzle-orm/pg-core';
 import { timestamps } from '../column.helpers';
 
-export const descriptionTypesEnum = pgEnum('descriptionType', [
+export const descriptionTypesEnum = pgEnum('description-type', [
   'para',
   'video',
 ]);
 export const course = pgTable(
   'course',
   {
-    id: serial().primaryKey(),
+    id: uuid().defaultRandom().primaryKey(),
     title: text().notNull(),
     description: text().notNull(),
     descriptionType: descriptionTypesEnum().default('para'),

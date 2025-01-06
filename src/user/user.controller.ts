@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Patch, Param } from '@nestjs/common';
 import { UserService } from './user.service';
 
 @Controller('users')
@@ -6,14 +6,16 @@ export class UserController {
   constructor(private userService: UserService) {}
   @Get()
   findAll() {
-    return 'Hello Users';
+    return this.userService.findAll();
   }
 
   @Post()
   create(@Body() newUser) {
-    console.log('newUser at controller', newUser);
-    const res = this.userService.create(newUser);
-    console.log('res', res);
-    return res;
+    return this.userService.create(newUser);
+  }
+
+  @Patch(':id')
+  update(@Body() newUser, @Param('id') id: string) {
+    return this.userService.update(id, newUser);
   }
 }

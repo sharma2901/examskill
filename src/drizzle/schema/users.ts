@@ -1,9 +1,9 @@
-import { pgTable, serial, text, uniqueIndex } from 'drizzle-orm/pg-core';
+import { pgTable, text, uniqueIndex, uuid } from 'drizzle-orm/pg-core';
 import { timestamps } from '../column.helpers';
 export const users = pgTable(
   'users',
   {
-    id: serial().primaryKey(),
+    id: uuid().defaultRandom().primaryKey(),
     name: text().notNull(),
     email: text().notNull().unique(),
     phone: text().notNull().unique(),
