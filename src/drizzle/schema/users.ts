@@ -1,4 +1,4 @@
-import { pgTable, text, uniqueIndex, uuid } from 'drizzle-orm/pg-core';
+import { boolean, pgTable, text, uniqueIndex, uuid } from 'drizzle-orm/pg-core';
 import { timestamps } from '../column.helpers';
 export const users = pgTable(
   'users',
@@ -7,6 +7,7 @@ export const users = pgTable(
     name: text().notNull(),
     email: text().notNull().unique(),
     phone: text().notNull().unique(),
+    deleted: boolean().default(false),
     ...timestamps,
   },
   (table) => {
