@@ -6,6 +6,8 @@
   "scripts": {
     "backend": "pnpm --filter=backend run start:dev",
     "frontend": "pnpm --filter=frontend run start:dev",
+    "db:generate": "pnpm --filter=frontend run db:generate",
+    "db:migrate": "pnpm --filter=frontend run db:migrate",
     "dev": "pnpm --stream -r start:dev",
     "dev:old": "pnpm run backend & pnpm run frontend"
   },
