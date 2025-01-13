@@ -7,6 +7,7 @@ export const Route = createFileRoute('/')({
 
 function Index() {
 
+
   const {isPending, error, data} = useQuery({
     queryKey:['userData'],
     queryFn: async () => {
